@@ -1,5 +1,5 @@
 provider "google" {
-  #access_token = var.access_token
+  access_token = var.access_token
 }
 resource "google_secret_manager_secret" "secret-basic" {
   secret_id = "us-dev-abcd-fghi-secret1"
