@@ -19,10 +19,14 @@ resource "google_secret_manager_secret" "secret-basic" {
     owner                = "hybridenv",
   }
 
+
   replication {
     user_managed {
       replicas {
         location = "us-central1"
+        customer_managed_encryption {
+          kms_key_name = "projects/airline1-sabre-wolverine/locations/us-east1/keyRings/savita-keyring1/cryptoKeys/savita-key11"
+        }
       }
       replicas {
         location = "us-east1"
