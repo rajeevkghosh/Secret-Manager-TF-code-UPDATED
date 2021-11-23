@@ -3,6 +3,7 @@ provider "google" {
 }
 resource "google_secret_manager_secret" "secret-basic" {
   secret_id = "us-dev-abcd-fghi-secret1"
+  project   = "airline1-sabre-wolverine"
 
   labels = {
     env                  = "default"
