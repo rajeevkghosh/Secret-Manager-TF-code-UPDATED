@@ -7,7 +7,7 @@ resource "google_secret_manager_secret" "secret-basic" {
 
   labels = {
     env                  = "default"
-    application_division = "pci",
+ #   application_division = "pci",
     application_name     = "demo",
     application_role     = "app",
     au                   = "0223092",
@@ -25,15 +25,9 @@ resource "google_secret_manager_secret" "secret-basic" {
     user_managed {
       replicas {
         location = "us-central1"
-        customer_managed_encryption {
-          kms_key_name = "projects/airline1-sabre-wolverine/locations/us-central1/keyRings/rajeev-keyring-test2/cryptoKeys/rajeev-key-central1"
-        }
       }
       replicas {
         location = "us-east1"
-        customer_managed_encryption {
-          kms_key_name = "projects/airline1-sabre-wolverine/locations/us-east1/keyRings/savita-keyring1/cryptoKeys/savita-key11"
-        }
       }
     }
   }
