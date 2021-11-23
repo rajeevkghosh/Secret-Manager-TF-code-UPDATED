@@ -26,7 +26,7 @@ resource "google_secret_manager_secret" "secret-basic" {
       replicas {
         location = "us-central1"
         customer_managed_encryption {
-          kms_key_name = "projects/airline1-sabre-wolverine/locations/us-east1/keyRings/savita-keyring1/cryptoKeys/savita-key11"
+          kms_key_name = "projects/airline1-sabre-wolverine/locations/us/keyRings/rajeev-keyring/cryptoKeys/rajeev-test-key"
         }
       }
       replicas {
