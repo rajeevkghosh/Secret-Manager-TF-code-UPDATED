@@ -7,8 +7,8 @@ data "google_kms_key_ring" "keyring1" {
   location = "us-central1"
 }
 
-resource "google_kms_crypto_key" "nav-key11" {
-  name            = "us-dev-abcd-fghi-cryptokey11"
+resource "google_kms_crypto_key" "nav-key12" {
+  name            = "us-dev-abcd-fghi-cryptokey12"
   key_ring        = data.google_kms_key_ring.keyring1.id
   rotation_period = "7776000s"
   labels = {
@@ -35,8 +35,8 @@ data "google_kms_key_ring" "keyring2" {
   name     = "us-dev-abcd-fghi-keyring2"
   location = "us-east1"
 }
-resource "google_kms_crypto_key" "nav-key21" {
-  name            = "us-dev-abcd-fghi-cryptokey21"
+resource "google_kms_crypto_key" "nav-key22" {
+  name            = "us-dev-abcd-fghi-cryptokey22"
   key_ring        = data.google_kms_key_ring.keyring2.id
   rotation_period = "7776000s"
   labels = {
@@ -83,13 +83,13 @@ resource "google_secret_manager_secret" "secret-basic" {
       replicas {
         location = "us-central1"
         customer_managed_encryption {
-          kms_key_name = google_kms_crypto_key.nav-key11.id
+          kms_key_name = google_kms_crypto_key.nav-key12.id
         }
       }
       replicas {
         location = "us-east1"
         customer_managed_encryption {
-          kms_key_name = google_kms_crypto_key.nav-key21.id
+          kms_key_name = google_kms_crypto_key.nav-key22.id
         }
       }
     }
