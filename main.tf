@@ -4,14 +4,28 @@ provider "google" {
 }
 
 resource "google_kms_key_ring" "keyring1" {
-  name     = "keyring-example-1"
+  name     = "us-dev-abcd-fghi-keyring1"
   location = "us-central1"
 }
 
 resource "google_kms_crypto_key" "nav-key1" {
-  name            = "cryopt-key-nav1"
+  name            = "us-dev-abcd-fghi-cryptokey1"
   key_ring        = google_kms_key_ring.keyring1.id
   rotation_period = "7776000s"
+  labels = {
+    env                  = "default"
+    application_division = "pci",
+    application_name     = "demo",
+    application_role     = "app",
+    au                   = "0223092",
+    created              = "20211122",
+    data_compliance      = "pci",
+    data_confidentiality = "pub",
+    data_type            = "test",
+    environment          = "dev",
+    gcp_region           = "us",
+    owner                = "hybridenv",
+  }
 
   lifecycle {
     prevent_destroy = true
@@ -19,14 +33,28 @@ resource "google_kms_crypto_key" "nav-key1" {
 }
 
 resource "google_kms_key_ring" "keyring2" {
-  name     = "keyring-example-2"
+  name     = "us-dev-abcd-fghi-keyring2"
   location = "us-east1"
 }
 
 resource "google_kms_crypto_key" "nav-key2" {
-  name            = "cryopt-key-nav2"
+  name            = "us-dev-abcd-fghi-cryptokey2"
   key_ring        = google_kms_key_ring.keyring2.id
   rotation_period = "7776000s"
+  labels = {
+    env                  = "default"
+    application_division = "pci",
+    application_name     = "demo",
+    application_role     = "app",
+    au                   = "0223092",
+    created              = "20211122",
+    data_compliance      = "pci",
+    data_confidentiality = "pub",
+    data_type            = "test",
+    environment          = "dev",
+    gcp_region           = "us",
+    owner                = "hybridenv",
+  }
 
   lifecycle {
     prevent_destroy = true
