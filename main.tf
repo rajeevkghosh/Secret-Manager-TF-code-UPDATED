@@ -56,11 +56,15 @@ resource "google_secret_manager_secret" "secret-basic" {
     user_managed {
       replicas {
         location = "us-central1"
+        customer_managed_encryption {
         kms_key_name = google_kms_crypto_key.nav-key1.id
+        }
       }
       replicas {
         location = "us-east1"
+        customer_managed_encryption {
         kms_key_name = google_kms_crypto_key.nav-key2.id
+      }
       }
     }
   }
