@@ -26,13 +26,13 @@ resource "google_secret_manager_secret" "secret-basic" {
       replicas {
         location = "us-central1"
         customer_managed_encryption {
-          kms_key_name = google_kms_crypto_key.nav-key13.id
+          kms_key_name = data.google_kms_crypto_key.nav-key13.id
         }
       }
       replicas {
         location = "us-east1"
         customer_managed_encryption {
-          kms_key_name = google_kms_crypto_key.nav-key23.id
+          kms_key_name = data.google_kms_crypto_key.nav-key23.id
         }
       }
     }
