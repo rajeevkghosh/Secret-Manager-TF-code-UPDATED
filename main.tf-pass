@@ -3,11 +3,11 @@ provider "google" {
 }
 
 resource "google_secret_manager_secret" "secret-basic" {
-  secret_id = "us-prod-sm-app01-sm01"
+  secret_id = "wf-us-prod-sm-app01-sm01"
 
 
   labels = {
-    #application_division = "pci",
+    application_division = "pci",
     application_name     = "demo",
     application_role     = "app",
     au                   = "0223092",
@@ -20,16 +20,16 @@ resource "google_secret_manager_secret" "secret-basic" {
   replication {
     user_managed {
       replicas {
-        location = "asia-south1"
-       /* customer_managed_encryption {
+        location = "us-central1"
+        customer_managed_encryption {
           kms_key_name = data.google_kms_crypto_key.nav-key13.id
-        }*/
+        }
       }
       replicas {
         location = "us-east1"
-       /* customer_managed_encryption {
+        customer_managed_encryption {
           kms_key_name = data.google_kms_crypto_key.nav-key23.id
-        }*/
+        }
       }
     }
   }
