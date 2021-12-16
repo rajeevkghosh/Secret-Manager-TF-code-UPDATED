@@ -3,7 +3,7 @@ provider "google" {
 }
 
 resource "google_secret_manager_secret" "secret-basic" {
-  secret_id = "wf_us_prod_sm_app01_sm01"
+  secret_id = "wf-us-prod-sm-app01-sm01"
 
 
   labels = {
