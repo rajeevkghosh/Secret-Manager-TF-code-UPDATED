@@ -3,20 +3,16 @@ provider "google" {
 }
 
 resource "google_secret_manager_secret" "secret-basic" {
-  secret_id = "dev-abcd-fghi-secret2"
+  secret_id = "wf_us_prod_sm_app01_sm01"
 
 
   labels = {
-    env                  = "default"
-   # application_division = "pci",
+    application_division = "pci",
     application_name     = "demo",
     application_role     = "app",
     au                   = "0223092",
     created              = "20211122",
-    data_compliance      = "pci",
-    data_confidentiality = "pub",
-    data_type            = "test",
-    environment          = "dev",
+    environment          = "nonprod",
     gcp_region           = "us",
     owner                = "hybridenv",
   }
@@ -24,32 +20,38 @@ resource "google_secret_manager_secret" "secret-basic" {
   replication {
     user_managed {
       replicas {
-        location = "asia-south1"
+        location = "us-central1"
+        customer_managed_encryption {
+          kms_key_name = data.google_kms_crypto_key.nav-key13.id
+        }
       }
       replicas {
         location = "us-east1"
+        customer_managed_encryption {
+          kms_key_name = data.google_kms_crypto_key.nav-key23.id
+        }
       }
     }
   }
 }
 
 data "google_kms_key_ring" "keyring1" {
-  name     = "us-dev-abcd-fghi-keyring-sm1"
+  name     = "wf-us-prod-kms-app01-res05"
   location = "us-central1"
 }
 
 data "google_kms_crypto_key" "nav-key13" {
-  name            = "us-dev-abcd-fghi-cryptokey-sm1"
+  name            = "wf-us-prod-kms-app01-res0501"
   key_ring        = data.google_kms_key_ring.keyring1.id
 }
 
 data "google_kms_key_ring" "keyring2" {
-  name     = "us-dev-abcd-fghi-keyring-sm2"
+  name     = "wf-us-prod-kms-app01-res06"
   location = "us-east1"
 }
 
 data "google_kms_crypto_key" "nav-key23" {
-  name            = "us-dev-abcd-fghi-cryptokey-sm2"
+  name            = "wf-us-prod-kms-app01-res0601"
   key_ring        = data.google_kms_key_ring.keyring2.id
   
 }

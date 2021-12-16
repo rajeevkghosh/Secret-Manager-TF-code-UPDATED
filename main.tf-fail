@@ -3,12 +3,12 @@ provider "google" {
 }
 
 resource "google_secret_manager_secret" "secret-basic" {
-  secret_id = "us-dev-abcd-fghi-secret2"
+  secret_id = "dev-abcd-fghi-secret2"
 
 
   labels = {
     env                  = "default"
-    application_division = "pci",
+   # application_division = "pci",
     application_name     = "demo",
     application_role     = "app",
     au                   = "0223092",
@@ -24,16 +24,10 @@ resource "google_secret_manager_secret" "secret-basic" {
   replication {
     user_managed {
       replicas {
-        location = "us-central1"
-        customer_managed_encryption {
-          kms_key_name = data.google_kms_crypto_key.nav-key13.id
-        }
+        location = "asia-south1"
       }
       replicas {
         location = "us-east1"
-        customer_managed_encryption {
-          kms_key_name = data.google_kms_crypto_key.nav-key23.id
-        }
       }
     }
   }
